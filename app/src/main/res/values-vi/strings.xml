@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Bid Reminder</string>
+
+    <string name="navigation_drawer_open">Mở</string>
+    <string name="navigation_drawer_close">Đóng</string>
+    <string name="action_search">Tìm kiếm</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="bidding">Bidding</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="home">Home</string>
+    <string name="saved">Đã lưu</string>
+    <string name="profile">Thông tin tài khoản</string>
+    <string name="edit_profile">Thay đổi thông tin</string>
+    <string name="edit_password">Thay đổi mật khẩu</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="sign_out">Đăng xuất</string>
+    <string name="settings">Cài đặt</string>
+    <string name="sign_in">Đăng nhập</string>tin
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="address">Địa chỉ</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="nation">Quốc gia</string>
+    <string name="retype_password">Nhập lại mật khẩu</string>
+    <string name="name">Tên hiển thị</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="buy">Mua</string>
+    <string name="save">Lưu lại</string>
+    <string name="settings_notification">Nhận thông báo khi giá sản phẩm thay đổi</string>
+</resources>

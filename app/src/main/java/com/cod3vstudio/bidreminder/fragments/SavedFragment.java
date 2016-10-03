@@ -57,7 +57,7 @@ public class SavedFragment extends BaseFragment<FragmentSavedBinding, SavedViewM
         setBindingContentView(inflater, container, R.layout.fragment_saved, BR.viewModel);
 
         View view =  mViewDataBinding.getRoot();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.saved_recycler_view);
 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, GridLayout.VERTICAL, false);

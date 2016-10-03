@@ -54,11 +54,23 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
+                break;
             case R.id.action_bid:
-                return true;
+                break;
             case R.id.action_favorite:
-                return true;
+                if (item.isChecked()) {
+                    item.setIcon(R.drawable.ic_favorite_normal);
+                    item.setChecked(false);
+                } else {
+                    item.setIcon(R.drawable.ic_favorite_active);
+                    item.setChecked(true);
+                }
+
+                mViewModel.setSaved(!item.isChecked());
+
+                break;
+            case R.id.action_buy:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -68,6 +80,12 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.product, menu);
+
+        if (mViewModel.isSaved()) {
+            menu.getItem(2).setChecked(true);
+            menu.getItem(2).setIcon(R.drawable.ic_favorite_active);
+        }
+
         return true;
     }
 

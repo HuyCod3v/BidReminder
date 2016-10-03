@@ -1,8 +1,10 @@
 package com.cod3vstudio.core.di;
 
 
+import com.cod3vstudio.core.model.services.storages.ISavedModel;
 import com.cod3vstudio.core.model.services.storages.IUserModel;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
+import com.cod3vstudio.core.model.services.storages.SavedModel;
 import com.cod3vstudio.core.model.services.storages.UserModel;
 
 import javax.inject.Singleton;
@@ -27,8 +29,15 @@ public class StorageModule {
 
     @Provides
     @Singleton
-    public ModelComponent providesModelComponent(IUserModel userModel) {
-        return new ModelComponent(userModel);
+    public ISavedModel providesSavedModel() {
+        return new SavedModel();
+    }
+
+
+    @Provides
+    @Singleton
+    public ModelComponent providesModelComponent(IUserModel userModel, ISavedModel savedModel) {
+        return new ModelComponent(userModel, savedModel);
     }
 
     //endregion

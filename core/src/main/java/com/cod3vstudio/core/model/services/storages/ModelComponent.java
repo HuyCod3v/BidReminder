@@ -6,11 +6,19 @@ package com.cod3vstudio.core.model.services.storages;
 public class ModelComponent {
     private final IUserModel mUserModel;
 
-    public ModelComponent(IUserModel userModel) {
+    private final ISavedModel mSavedModel;
+
+    public ModelComponent(IUserModel userModel, ISavedModel savedModel) {
         mUserModel = userModel;
+
+        mSavedModel = savedModel;
     }
 
     public IUserModel getUserModel() {
         return mUserModel;
+    }
+
+    public ISavedModel getSavedModel() {
+        return mSavedModel;
     }
 }

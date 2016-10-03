@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 import com.cod3vstudio.core.BR;
 import com.cod3vstudio.core.model.entities.Change;
 import com.cod3vstudio.core.model.entities.Product;
+import com.cod3vstudio.core.model.entities.Saved;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.view.INavigator;
@@ -124,5 +125,38 @@ public class ProductViewModel extends BaseViewModel {
         getCurrentActivity().setTitle(mProduct.getName());
     }
 
+    @Subscribe(sticky = true)
+    public void event(Saved saved) {
+        Product product = new Product();
+        product.setImage(saved.getImage());
+        product.setDescription(saved.getDescription());
+        product.setCurrencyUnit(saved.getCurrencyUnit());
+        product.setId(saved.getId());
+        product.setPrice(saved.getPrice());
+        product.setName(saved.getName());
+        setProduct(product);
+        getCurrentActivity().setTitle(mProduct.getName());
+    }
+
     //endregion
+
+    public void setSaved(boolean isSaved) {
+        if (!isSaved) {
+            Saved saved = new Saved();
+            saved.setId(mProduct.getId());
+            saved.setName(mProduct.getName());
+            saved.setCurrencyUnit(mProduct.getCurrencyUnit());
+            saved.setPrice(mProduct.getPrice());
+            saved.setDescription(mProduct.getDescription());
+            saved.setImage(mProduct.getImage());
+
+            mModelComponent.getSavedModel().add(saved);
+        } else {
+            mModelComponent.getSavedModel().delete(mProduct.getId());
+        }
+    }
+
+    public boolean isSaved() {
+        return mModelComponent.getSavedModel().find(mProduct.getId()) != null;
+    }
 }

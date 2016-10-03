@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
     <variable
-        name="product"
-        type="com.cod3vstudio.core.model.entities.Product"/>
+        name="saved"
+        type="com.cod3vstudio.core.model.entities.Saved"/>
     <variable
         name="viewModel"
         type="com.cod3vstudio.core.viewmodel.SavedViewModel"/>
@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:onClick="@{() -> viewModel.showProductDetailsCommand(product)}"
+            android:onClick="@{() -> viewModel.showProductDetailsCommand(saved)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -38,7 +38,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#444444"
-                android:text="@{product.name}"
+                android:text="@{saved.name}"
                 android:textSize="14sp"/>
 
             <LinearLayout
@@ -51,13 +51,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextPrice"
-                    android:text="@{String.valueOf(product.price)}"/>
+                    android:text="@{String.valueOf(saved.price)}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="@dimen/normal_horizontal_margin"
                     android:layout_height="wrap_content"
-                    android:text="@{product.currencyUnit}"/>
+                    android:text="@{saved.currencyUnit}"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -12,10 +12,12 @@ import com.cod3vstudio.bidreminder.activities.SignUpActivity;
 import com.cod3vstudio.core.di.AppModule;
 import com.cod3vstudio.core.di.CloudModule;
 import com.cod3vstudio.core.di.ViewModelModule;
-import com.cod3vstudio.core.model.entities.User;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseApplication;
 import com.cod3vstudio.core.view.INavigator;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by Administrator on 7/25/2016.
@@ -30,7 +32,7 @@ public class App extends BaseApplication {
     //endregion
 
     //region Getter and Setter
-
+    
     public synchronized static AppComponent sharedComponent() {
         return sAppComponent;
     }
@@ -60,6 +62,11 @@ public class App extends BaseApplication {
                 .cloudModule(new CloudModule())
                 .viewModelModule(new ViewModelModule())
                 .build();
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
+        Realm.setDefaultConfiguration(realmConfig);
+
     }
 
     //endregion

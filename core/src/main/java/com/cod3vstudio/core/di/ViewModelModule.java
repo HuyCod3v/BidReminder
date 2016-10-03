@@ -47,8 +47,8 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    SavedViewModel providesSavedViewModel(INavigator navigator) {
-        return new SavedViewModel(navigator);
+    SavedViewModel providesSavedViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new SavedViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides

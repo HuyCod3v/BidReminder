@@ -4,6 +4,9 @@ import android.databinding.Bindable;
 
 import com.cod3vstudio.core.BR;
 import com.cod3vstudio.core.model.entities.Product;
+import com.cod3vstudio.core.model.entities.Saved;
+import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
+import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.INavigator;
 
@@ -17,14 +20,22 @@ public class SavedViewModel extends BaseViewModel {
 
     //region Properties
 
-    private List<Product> mProducts;
+    private List<Saved> mSaveds;
+
+    private ModelComponent mModelComponent;
+
+    private ServiceComponent mServiceComponent;
 
     //endregion
 
     //region Constructors
 
-    public SavedViewModel(INavigator navigator) {
+    public SavedViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
         super(navigator);
+
+        mModelComponent = modelComponent;
+
+        mServiceComponent = serviceComponent;
     }
 
     //endregion
@@ -32,14 +43,16 @@ public class SavedViewModel extends BaseViewModel {
     //region Getters and Setters
 
     @Bindable
-    public List<Product> getProducts() {
-        return mProducts;
+    public List<Saved> getSaveds() {
+        return mSaveds;
     }
 
-    public void setProducts(List<Product> products) {
-        mProducts = products;
-        notifyPropertyChanged(BR.products);
+    public void setSaveds(List<Saved> mSaveds) {
+        this.mSaveds = mSaveds;
+
+        notifyPropertyChanged(BR.saveds);
     }
+
 
     //endregion
 
@@ -49,14 +62,14 @@ public class SavedViewModel extends BaseViewModel {
     public void onCreate() {
         super.onCreate();
 
-        loadSavedProducts();
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-
+        loadSaveds();
     }
 
     @Override
@@ -73,22 +86,14 @@ public class SavedViewModel extends BaseViewModel {
 
     //region Public methods
 
-    public void loadSavedProducts() {
-        List<Product> products = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Product product = new Product();
-            product.setId(i);
-            product.setName("Name " + i);
-            product.setPrice(i);
-            product.setCurrencyUnit("VND");
-            products.add(product);
-        }
+    public void loadSaveds() {
+        List<Saved> saveds = mModelComponent.getSavedModel().findAll();
 
-        setProducts(products);
+        setSaveds(saveds);
     }
 
-    public void showProductDetailsCommand(Product product) {
-        postSticky(product);
+    public void showProductDetailsCommand(Saved saved) {
+        postSticky(saved);
         getNavigator().navigateTo(Constants.PRODUCT_PAGE);
     }
 

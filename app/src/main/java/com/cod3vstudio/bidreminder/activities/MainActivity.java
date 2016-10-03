@@ -1,5 +1,6 @@
 package com.cod3vstudio.bidreminder.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -23,6 +24,8 @@ import com.cod3vstudio.bidreminder.fragments.SavedFragment;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseActivity;
 import com.cod3vstudio.core.viewmodel.MainViewModel;
+
+import java.util.Locale;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel>
         implements NavigationView.OnNavigationItemSelectedListener {

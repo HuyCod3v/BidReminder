@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.cod3vstudio.bidreminder.BR;
 import com.cod3vstudio.bidreminder.R;
 import com.cod3vstudio.core.model.entities.Product;
+import com.cod3vstudio.core.model.entities.Saved;
 import com.cod3vstudio.core.view.BaseRecyclerViewAdapter;
 import com.cod3vstudio.core.view.ViewHolder;
 import com.cod3vstudio.core.viewmodel.SavedViewModel;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by Administrator on 8/2/2016.
  */
-public class SavedListAdapter extends BaseRecyclerViewAdapter<SavedViewModel, List<Product>> {
+public class SavedListAdapter extends BaseRecyclerViewAdapter<SavedViewModel, List<Saved>> {
 
     //region Override Methods
 
@@ -32,7 +33,7 @@ public class SavedListAdapter extends BaseRecyclerViewAdapter<SavedViewModel, Li
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewDataBinding viewDataBinding = ((ViewHolder) holder).getViewDataBinding();
 
-        viewDataBinding.setVariable(BR.product, mData.get(position));
+        viewDataBinding.setVariable(BR.saved, mData.get(position));
         viewDataBinding.setVariable(BR.viewModel, mViewModel);
 
         viewDataBinding.executePendingBindings();

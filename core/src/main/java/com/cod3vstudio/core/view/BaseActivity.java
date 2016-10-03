@@ -1,5 +1,6 @@
 package com.cod3vstudio.core.view;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 
 
 import com.cod3vstudio.core.viewmodel.BaseViewModel;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -33,6 +36,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLanguage(BaseApplication.getLocale());
 
         if (mViewModel != null) {
             mViewModel.onCreate();
@@ -94,6 +98,15 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
             eventBus.unregister(this);
         }
 
+    }
+
+    protected final void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
     }
 
     //endregion

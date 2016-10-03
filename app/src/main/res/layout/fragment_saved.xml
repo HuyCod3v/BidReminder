@@ -19,7 +19,7 @@
             android:background="@color/colorBackground"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            app:items="@{viewModel.products}"
-            android:id="@+id/product_recycler_view" />
+            app:items="@{viewModel.saveds}"
+            android:id="@+id/saved_recycler_view" />
     </LinearLayout>
 </layout>
