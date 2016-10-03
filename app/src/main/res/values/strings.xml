@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Bid Reminder</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="bidding">Bidding</string>
+    <string name="cart">Cart</string>
+    <string name="home">Home</string>
+    <string name="saved">Saved</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_password">Edit password</string>
+    <string name="filter">Filter</string>
+    <string name="sign_out">Sign out</string>
+    <string name="settings">Settings</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="nation">Nation</string>
+    <string name="retype_password">Retype password</string>
+    <string name="name">Name</string>
+    <string name="language">Language</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="english">English</string>
+    <string name="buy">Buy</string>
+    <string name="save">Save</string>
+    <string name="settings_notification">Receive alerts when prices change</string>
+</resources>
