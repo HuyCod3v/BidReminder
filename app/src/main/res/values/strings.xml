@@ -29,5 +29,9 @@
     <string name="english">English</string>
     <string name="buy">Buy</string>
     <string name="save">Save</string>
+    <string name="price">Price</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="category">Category</string>
     <string name="settings_notification">Receive alerts when prices change</string>
 </resources>

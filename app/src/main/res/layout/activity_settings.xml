@@ -2,7 +2,9 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.cod3vstudio.core.viewmodel.SettingsViewModel"/>
@@ -20,48 +22,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/normal_activity_padding"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/normal_activity_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/normal_padding"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/normal_padding">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextPrimary"
-                    android:text="@string/language"/>
+                    android:text="@string/language"
+                    android:id="@+id/txtLanguage"
+                    android:textColor="@color/colorTextPrimary"/>
 
                 <RadioGroup
+                    android:id="@+id/rdgLanguage"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:layout_height="wrap_content">
+                    android:layout_marginTop="@dimen/item_margin_top">
 
                     <RadioButton
+                        android:id="@+id/rbVietnamese"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/vietnamese"/>
 
                     <RadioButton
+                        android:id="@+id/rbEnglish"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
                         android:text="@string/english"/>
 
                 </RadioGroup>
 
                 <CheckBox
+                    android:id="@+id/cbNotification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/settings_notification"/>
 
             </LinearLayout>
 
         </LinearLayout>
-
 
 
     </LinearLayout>

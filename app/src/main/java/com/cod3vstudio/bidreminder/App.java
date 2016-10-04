@@ -1,5 +1,7 @@
 package com.cod3vstudio.bidreminder;
 
+import android.content.res.Configuration;
+
 import com.cod3vstudio.bidreminder.activities.EditPasswordActivity;
 import com.cod3vstudio.bidreminder.activities.EditProfileActivity;
 import com.cod3vstudio.bidreminder.activities.FilterActivity;
@@ -67,6 +69,11 @@ public class App extends BaseApplication {
         RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(realmConfig);
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     //endregion

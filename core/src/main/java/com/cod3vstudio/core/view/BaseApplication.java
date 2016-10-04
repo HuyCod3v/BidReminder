@@ -24,6 +24,8 @@ public class BaseApplication extends Application implements  Application.Activit
 
     //region Setters and Getters
 
+
+
     public static String getLocale() {
         return sLocale;
     }

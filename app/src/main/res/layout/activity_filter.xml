@@ -26,12 +26,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Price"
+                android:text="@string/price"
                 android:layout_marginTop="@dimen/edit_profile_item_margin_top"
                 android:textSize="14sp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/item_margin_top"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -40,7 +41,7 @@
                     android:text=""
                     android:inputType="numberSigned|numberDecimal"
                     android:textSize="14sp"
-                    android:hint="From"/>
+                    android:hint="@string/from"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -54,16 +55,16 @@
                     android:text=""
                     android:inputType="numberSigned|numberDecimal"
                     android:textSize="14sp"
-                    android:hint="To"/>
+                    android:hint="@string/to"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
+                android:layout_marginTop="@dimen/item_margin_top"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="Category"/>
+                android:text="@string/category"/>
 
             <Spinner
                 android:layout_width="match_parent"

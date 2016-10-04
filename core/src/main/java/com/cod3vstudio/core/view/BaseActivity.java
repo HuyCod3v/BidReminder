@@ -1,5 +1,7 @@
 package com.cod3vstudio.core.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -26,6 +28,8 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     protected B mViewDataBinding;
 
+    protected String mCurrentLocale = "en";
+
     @Inject
     protected V mViewModel;
 
@@ -36,7 +40,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLanguage(BaseApplication.getLocale());
+
+        SharedPreferences sharedPreferences = getSharedPreferences(com.cod3vstudio.core.util.Configuration.APP_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        String language = sharedPreferences.getString(com.cod3vstudio.core.util.Configuration.LANGUAGE, "en");
+        setLanguage(language);
 
         if (mViewModel != null) {
             mViewModel.onCreate();
@@ -107,6 +114,8 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
+        mCurrentLocale = language;
+
     }
 
     //endregion

@@ -1,5 +1,7 @@
 package com.cod3vstudio.bidreminder.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -52,7 +54,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(new HomeFragment());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(com.cod3vstudio.core.util.Configuration.APP_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        String language = sharedPreferences.getString(com.cod3vstudio.core.util.Configuration.LANGUAGE, "en");
+        if (!language.equals(mCurrentLocale)) {
+            recreate();
+        }
     }
 
     @Override

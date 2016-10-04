@@ -47,6 +47,7 @@ public class SavedViewModel extends BaseViewModel {
         return mSaveds;
     }
 
+
     public void setSaveds(List<Saved> mSaveds) {
         this.mSaveds = mSaveds;
 

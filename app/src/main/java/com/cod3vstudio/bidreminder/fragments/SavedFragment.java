@@ -59,11 +59,11 @@ public class SavedFragment extends BaseFragment<FragmentSavedBinding, SavedViewM
         View view =  mViewDataBinding.getRoot();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.saved_recycler_view);
 
+        getActivity().setTitle(getString(R.string.saved));
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, GridLayout.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         mSavedListAdapter = new SavedListAdapter();
         mSavedListAdapter.setViewModel(mViewModel);
         recyclerView.setAdapter(mSavedListAdapter);

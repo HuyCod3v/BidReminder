@@ -16,6 +16,10 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EActivity;
+
+@EActivity
 public class ProductActivity extends BaseActivity<ActivityProductBinding, ProductViewModel> {
 
     @Override
@@ -66,7 +70,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                     item.setChecked(true);
                 }
 
-                mViewModel.setSaved(!item.isChecked());
+                setSaved(!item.isChecked());
 
                 break;
             case R.id.action_buy:
@@ -87,6 +91,11 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
         }
 
         return true;
+    }
+
+    @Background
+    private void setSaved(boolean isSaved) {
+        mViewModel.setSaved(isSaved);
     }
 
 }
