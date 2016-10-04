@@ -3,6 +3,7 @@ package com.cod3vstudio.core.model.services.clouds;
 import com.cod3vstudio.core.model.entities.User;
 import com.cod3vstudio.core.model.responses.APIResponse;
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -12,10 +13,10 @@ import retrofit2.http.Query;
  */
 public interface IUserService {
 
-    @POST("")
+    @GET("/api/authenticate/sign-in")
     Call<APIResponse<User>> signIn(@Query("email") String email, @Query("password") String password);
 
-    @POST("")
+    @GET("/api/authenticate/sign-up")
     Call<APIResponse<Boolean>> signUp(@Query("email") String email, @Query("password") String password, @Query("name") String name);
 
 }

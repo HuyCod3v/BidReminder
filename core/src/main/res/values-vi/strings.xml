@@ -4,4 +4,8 @@
     <string name="signing_up">Đang đăng ký</string>
     <string name="account_already_exists">Tài khoản đã tồn tại</string>
     <string name="incorrect_account">Tài khoản không chính xác</string>
+    <string name="account_registration_successful">Đăng ký tài khoản thành công</string>
+    <string name="account_registration_error">Lỗi đăng ký tài khoản</string>
+    <string name="account_login_failures">Đăng nhập tài khoản thất bại</string>
+    <string name="logged_in_successfully">Đăng nhập thành công</string>
 </resources>

@@ -4,10 +4,16 @@ import android.util.Patterns;
 
 import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.User;
+import com.cod3vstudio.core.model.responses.APIResponse;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.INavigator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Administrator on 8/1/2016.
  */
@@ -110,13 +116,28 @@ public class SignInViewModel extends BaseViewModel {
 
     public void signInCommand() {
         if (validateInput()) {
-            User user = mModelComponent.getUserModel().find(mEmail, mPassword);
-            if (user != null) {
-                getNavigator().goBack();
-                getNavigator().getApplication().setSignedInUser(user);
-            } else {
-                showMessage(getCurrentActivity().getString(R.string.incorrect_account));
-            }
+            getNavigator().showBusyIndicator(getCurrentActivity().getString(R.string.signing_in));
+
+            mServiceComponent.getUserService().signIn(mEmail, mPassword).enqueue(new Callback<APIResponse<User>>() {
+                @Override
+                public void onResponse(Call<APIResponse<User>> call, Response<APIResponse<User>> response) {
+                    if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                        getNavigator().goBack();
+                        getNavigator().getApplication().setSignedInUser(response.body().getData());
+                        showMessage(getCurrentActivity().getString(R.string.logged_in_successfully));
+                    } else {
+                        showMessage(getCurrentActivity().getString(R.string.incorrect_account));
+                    }
+
+                    getNavigator().hideBusyIndicator();
+                }
+
+                @Override
+                public void onFailure(Call<APIResponse<User>> call, Throwable t) {
+                    getNavigator().hideBusyIndicator();
+                    showMessage(getCurrentActivity().getString(R.string.account_login_failures));
+                }
+            });
         }
     }
 

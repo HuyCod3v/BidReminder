@@ -4,4 +4,8 @@
     <string name="signing_up">Signing Up</string>
     <string name="account_already_exists">Account already exists</string>
     <string name="incorrect_account">Incorrect account</string>
+    <string name="account_registration_successful">Account registration successful</string>
+    <string name="account_registration_error">Account registration error</string>
+    <string name="account_login_failures">Account login failures</string>
+    <string name="logged_in_successfully">Logged in successfully</string>
 </resources>

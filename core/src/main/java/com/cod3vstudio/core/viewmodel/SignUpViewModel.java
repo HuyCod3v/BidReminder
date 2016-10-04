@@ -5,9 +5,14 @@ import android.util.Patterns;
 
 import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.User;
+import com.cod3vstudio.core.model.responses.APIResponse;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.view.INavigator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 8/3/2016.
@@ -141,13 +146,28 @@ public class SignUpViewModel extends BaseViewModel {
 
     public void signUpCommand() {
         if (validateInput()) {
-            if (mModelComponent.getUserModel().find(mEmail, mPassword) == null) {
-                User user = initUser();
-                mModelComponent.getUserModel().add(user);
-                getNavigator().goBack();
-            } else {
-                showMessage(getCurrentActivity().getString(R.string.account_already_exists));
-            }
+            User user = initUser();
+            getNavigator().showBusyIndicator(getCurrentActivity().getString(R.string.signing_up));
+
+            mServiceComponent.getUserService().signUp(user.getEmail(), user.getPassword(), user.getName()).enqueue(new Callback<APIResponse<Boolean>>() {
+                @Override
+                public void onResponse(Call<APIResponse<Boolean>> call, Response<APIResponse<Boolean>> response) {
+                    if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                        getNavigator().goBack();
+                        showMessage(getCurrentActivity().getString(R.string.account_registration_successful));
+                    } else {
+                        showMessage(getCurrentActivity().getString(R.string.account_registration_error));
+                    }
+                    getNavigator().hideBusyIndicator();
+                }
+
+                @Override
+                public void onFailure(Call<APIResponse<Boolean>> call, Throwable t) {
+                    showMessage(getCurrentActivity().getString(R.string.account_registration_error));
+                    getNavigator().hideBusyIndicator();
+                }
+            });
+
         }
     }
 
@@ -165,6 +185,14 @@ public class SignUpViewModel extends BaseViewModel {
         user.setPassword(mPassword);
         user.setName(mName);
         return user;
+    }
+
+    private boolean hasResponse(Response<APIResponse> response) {
+        if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //endregion
