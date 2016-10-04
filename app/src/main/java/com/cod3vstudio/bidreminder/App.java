@@ -2,6 +2,7 @@ package com.cod3vstudio.bidreminder;
 
 import android.content.res.Configuration;
 
+import com.cod3vstudio.bidreminder.activities.BidActivity;
 import com.cod3vstudio.bidreminder.activities.EditPasswordActivity;
 import com.cod3vstudio.bidreminder.activities.EditProfileActivity;
 import com.cod3vstudio.bidreminder.activities.FilterActivity;
@@ -58,6 +59,7 @@ public class App extends BaseApplication {
         navigator.configure(Constants.EDIT_PASSWORD_PAGE, EditPasswordActivity.class);
         navigator.configure(Constants.SETTINGS_PAGE, SettingsActivity.class);
         navigator.configure(Constants.FILTER_PAGE, FilterActivity.class);
+        navigator.configure(Constants.BID_PAGE, BidActivity.class);
 
         sAppComponent = DaggerAppComponent.builder()
                 .appModule(appModule)

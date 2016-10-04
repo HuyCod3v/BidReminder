@@ -78,29 +78,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_filter) {
-            mViewModel.getNavigator().navigateTo(Constants.FILTER_PAGE);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -139,7 +116,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 mViewModel.getNavigator().navigateTo(Constants.SETTINGS_PAGE);
                 break;
             case R.id.nav_profile:
-                mViewModel.getNavigator().navigateTo(Constants.PROFILE_PAGE);
+                if (mViewModel.isSignedUserAvailable()) {
+                    mViewModel.getNavigator().navigateTo(Constants.PROFILE_PAGE);
+                } else {
+                    mViewModel.getNavigator().navigateTo(Constants.SIGN_IN_PAGE);
+                }
                 break;
             case R.id.nav_sign_out:
                 if (mViewModel.isSignedUserAvailable()) {

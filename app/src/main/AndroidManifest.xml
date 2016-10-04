@@ -39,18 +39,22 @@
         </activity>
         <activity android:name=".activities.EditProfileActivity">
         </activity>
-        <activity android:name=".activities.EditPasswordActivity"
-                  android:theme="@style/DialogTheme">
+        <activity
+            android:name=".activities.EditPasswordActivity"
+            android:theme="@style/DialogTheme">
         </activity>
-
-        <activity android:name=".activities.SettingsActivity"
-                  android:theme="@style/DialogTheme">
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:theme="@style/DialogTheme">
         </activity>
-
-        <activity android:name=".activities.FilterActivity"
-                  android:theme="@style/DialogTheme">
+        <activity
+            android:name=".activities.FilterActivity"
+            android:theme="@style/DialogTheme">
         </activity>
-
+        <activity
+            android:name=".activities.BidActivity"
+            android:theme="@style/DialogTheme">
+        </activity>
     </application>
 
 </manifest>

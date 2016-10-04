@@ -2,7 +2,10 @@ package com.cod3vstudio.core.viewmodel;
 
 import android.util.Patterns;
 
+import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.User;
+import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
+import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.INavigator;
 /**
@@ -15,6 +18,9 @@ public class SignInViewModel extends BaseViewModel {
     private String mPassword;
 
     private String mEmail;
+
+    private ModelComponent mModelComponent;
+    private ServiceComponent mServiceComponent;
 
     //endregion
 
@@ -40,8 +46,10 @@ public class SignInViewModel extends BaseViewModel {
 
     //region Constructors
 
-    public SignInViewModel(INavigator navigator) {
+    public SignInViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
         super(navigator);
+        mModelComponent = modelComponent;
+        mServiceComponent = serviceComponent;
     }
 
     //endregion
@@ -102,11 +110,20 @@ public class SignInViewModel extends BaseViewModel {
 
     public void signInCommand() {
         if (validateInput()) {
-            User user = new User();
-            user.setEmail(mEmail);
-            user.setPassword(mPassword);
+            User user = mModelComponent.getUserModel().find(mEmail, mPassword);
+            if (user != null) {
+                getNavigator().goBack();
+                getNavigator().getApplication().setSignedInUser(user);
+            } else {
+                showMessage(getCurrentActivity().getString(R.string.incorrect_account));
+            }
         }
     }
+
+    //endregion
+
+    //region Private methods
+
 
     //endregion
 

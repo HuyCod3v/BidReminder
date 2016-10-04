@@ -1,8 +1,12 @@
 package com.cod3vstudio.core.viewmodel;
 
+import android.app.Service;
 import android.util.Patterns;
 
+import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.User;
+import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
+import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.view.INavigator;
 
 /**
@@ -19,6 +23,10 @@ public class SignUpViewModel extends BaseViewModel {
     private String mRetypePassword;
 
     private String mName;
+
+    private ModelComponent mModelComponent;
+
+    private ServiceComponent mServiceComponent;
 
     //endregion
 
@@ -60,8 +68,12 @@ public class SignUpViewModel extends BaseViewModel {
 
     //region Constructors
 
-    public SignUpViewModel(INavigator navigator) {
+    public SignUpViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
         super(navigator);
+
+        mModelComponent = modelComponent;
+
+        mServiceComponent = serviceComponent;
     }
 
     //endregion
@@ -129,15 +141,30 @@ public class SignUpViewModel extends BaseViewModel {
 
     public void signUpCommand() {
         if (validateInput()) {
-            User user = new User();
-            user.setEmail(mEmail);
-            user.setPassword(mPassword);
-            user.setName(mName);
+            if (mModelComponent.getUserModel().find(mEmail, mPassword) == null) {
+                User user = initUser();
+                mModelComponent.getUserModel().add(user);
+                getNavigator().goBack();
+            } else {
+                showMessage(getCurrentActivity().getString(R.string.account_already_exists));
+            }
         }
     }
 
     public void showSignInCommand() {
         getNavigator().goBack();
+    }
+
+    //endregion
+
+    //region Private methods
+
+    private User initUser() {
+        User user = new User();
+        user.setEmail(mEmail);
+        user.setPassword(mPassword);
+        user.setName(mName);
+        return user;
     }
 
     //endregion

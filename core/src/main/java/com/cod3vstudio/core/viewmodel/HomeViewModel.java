@@ -31,6 +31,12 @@ public class HomeViewModel extends BaseViewModel {
 
     //region Getters and Setters
 
+
+    @Override
+    public INavigator getNavigator() {
+        return super.getNavigator();
+    }
+
     @Bindable
     public List<Product> getProducts() {
         return mProducts;

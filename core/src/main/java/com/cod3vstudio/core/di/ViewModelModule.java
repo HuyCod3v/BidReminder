@@ -4,6 +4,7 @@ package com.cod3vstudio.core.di;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.view.INavigator;
+import com.cod3vstudio.core.viewmodel.BidViewModel;
 import com.cod3vstudio.core.viewmodel.BiddingViewModel;
 import com.cod3vstudio.core.viewmodel.CartViewModel;
 import com.cod3vstudio.core.viewmodel.CategoryViewModel;
@@ -71,14 +72,15 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    SignInViewModel providesSignInViewModel(INavigator navigator) {
-        return new SignInViewModel(navigator);
+    SignInViewModel providesSignInViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new SignInViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides
     @Singleton
-    SignUpViewModel providesSignUpViewModel(INavigator navigator) {
-        return new SignUpViewModel(navigator);
+    SignUpViewModel providesSignUpViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new SignUpViewModel(navigator, modelComponent, serviceComponent);
+
     }
 
     @Provides
@@ -115,6 +117,12 @@ public class ViewModelModule {
     @Singleton
     FilterViewModel providesFilterViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
         return new FilterViewModel(navigator, modelComponent, serviceComponent);
+    }
+
+    @Provides
+    @Singleton
+    BidViewModel providesBidViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new BidViewModel(navigator, modelComponent, serviceComponent);
     }
 
     //endregion

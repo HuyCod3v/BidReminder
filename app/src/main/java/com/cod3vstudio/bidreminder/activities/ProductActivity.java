@@ -10,6 +10,7 @@ import com.cod3vstudio.bidreminder.App;
 import com.cod3vstudio.bidreminder.BR;
 import com.cod3vstudio.bidreminder.R;
 import com.cod3vstudio.bidreminder.databinding.ActivityProductBinding;
+import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseActivity;
 import com.cod3vstudio.core.viewmodel.ProductViewModel;
 import com.github.mikephil.charting.charts.LineChart;
@@ -60,6 +61,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
                 onBackPressed();
                 break;
             case R.id.action_bid:
+                mViewModel.showBidPageCommand();
                 break;
             case R.id.action_favorite:
                 if (item.isChecked()) {

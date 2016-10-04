@@ -18,17 +18,9 @@ public class BaseApplication extends Application implements  Application.Activit
 
     private User mSignedInUser;
 
-    private static String sLocale = "vi";
-
     //endregion
 
     //region Setters and Getters
-
-
-
-    public static String getLocale() {
-        return sLocale;
-    }
 
     public boolean isSignedUserAvailable() {
         return mSignedInUser != null;

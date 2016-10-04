@@ -32,5 +32,9 @@
     <string name="from">Từ</string>
     <string name="to">Đến</string>
     <string name="category">Danh mục</string>
+    <string name="bid">Đấu giá</string>
+    <string name="current_price">Giá hiện tại</string>
+    <string name="bid_price">Mua với giá</string>
+    <string name="settings_bid">Tự động mua khi giá chạm mốc</string>
     <string name="settings_notification">Nhận thông báo khi giá sản phẩm thay đổi</string>
 </resources>

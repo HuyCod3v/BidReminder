@@ -1,5 +1,6 @@
 package com.cod3vstudio.bidreminder;
 
+import com.cod3vstudio.bidreminder.activities.BidActivity;
 import com.cod3vstudio.bidreminder.activities.EditPasswordActivity;
 import com.cod3vstudio.bidreminder.activities.EditProfileActivity;
 import com.cod3vstudio.bidreminder.activities.FilterActivity;
@@ -47,6 +48,8 @@ public interface AppComponent {
     void inject(SettingsActivity settingsActivity);
 
     void inject(FilterActivity filterActivity);
+
+    void inject(BidActivity bidActivity);
 
     //endregion
 

@@ -23,7 +23,7 @@ public class Constants {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            MAIN_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, PRODUCT_PAGE, PROFILE_PAGE, EDIT_PROFILE_PAGE, EDIT_PASSWORD_PAGE, SETTINGS_PAGE, FILTER_PAGE
+            MAIN_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, PRODUCT_PAGE, PROFILE_PAGE, EDIT_PROFILE_PAGE, EDIT_PASSWORD_PAGE, SETTINGS_PAGE, FILTER_PAGE, BID_PAGE
     })
     public @interface PageKey {}
 
@@ -36,6 +36,7 @@ public class Constants {
     public static final int EDIT_PASSWORD_PAGE = 6;
     public static final int SETTINGS_PAGE = 7;
     public static final int FILTER_PAGE = 8;
+    public static final int BID_PAGE = 9;
 
     public static final int PICK_IMAGE_COMMAND = 1;
 

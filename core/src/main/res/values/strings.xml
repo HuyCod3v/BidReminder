@@ -2,4 +2,6 @@
     <string name="app_name">Core</string>
     <string name="signing_in">Signing In</string>
     <string name="signing_up">Signing Up</string>
+    <string name="account_already_exists">Account already exists</string>
+    <string name="incorrect_account">Incorrect account</string>
 </resources>

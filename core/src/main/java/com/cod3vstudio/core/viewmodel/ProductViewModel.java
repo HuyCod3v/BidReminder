@@ -8,6 +8,7 @@ import com.cod3vstudio.core.model.entities.Product;
 import com.cod3vstudio.core.model.entities.Saved;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
+import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.INavigator;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -115,31 +116,6 @@ public class ProductViewModel extends BaseViewModel {
 
     //region Public methods
 
-    //endregion
-
-    //region Subscribe methods
-
-    @Subscribe(sticky = true)
-    public void event(Product product) {
-        setProduct(product);
-        getCurrentActivity().setTitle(mProduct.getName());
-    }
-
-    @Subscribe(sticky = true)
-    public void event(Saved saved) {
-        Product product = new Product();
-        product.setImage(saved.getImage());
-        product.setDescription(saved.getDescription());
-        product.setCurrencyUnit(saved.getCurrencyUnit());
-        product.setId(saved.getId());
-        product.setPrice(saved.getPrice());
-        product.setName(saved.getName());
-        setProduct(product);
-        getCurrentActivity().setTitle(mProduct.getName());
-    }
-
-    //endregion
-
     public void setSaved(boolean isSaved) {
         if (!isSaved) {
             Saved saved = new Saved();
@@ -159,4 +135,36 @@ public class ProductViewModel extends BaseViewModel {
     public boolean isSaved() {
         return mModelComponent.getSavedModel().find(mProduct.getId()) != null;
     }
+
+    public void showBidPageCommand() {
+        postSticky(mProduct);
+        getNavigator().navigateTo(Constants.BID_PAGE);
+    }
+
+    //endregion
+
+    //region Subscribe methods
+
+    @Subscribe(sticky = true)
+    public void event(Product product) {
+        setProduct(product);
+        getCurrentActivity().setTitle(mProduct.getName());
+        unregister();
+    }
+
+    @Subscribe(sticky = true)
+    public void event(Saved saved) {
+        Product product = new Product();
+        product.setImage(saved.getImage());
+        product.setDescription(saved.getDescription());
+        product.setCurrencyUnit(saved.getCurrencyUnit());
+        product.setId(saved.getId());
+        product.setPrice(saved.getPrice());
+        product.setName(saved.getName());
+        setProduct(product);
+        getCurrentActivity().setTitle(mProduct.getName());
+    }
+
+    //endregion
+
 }

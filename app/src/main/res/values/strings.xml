@@ -33,5 +33,9 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="category">Category</string>
+    <string name="bid">Bid</string>
+    <string name="current_price">Current price</string>
+    <string name="bid_price">Bid price</string>
+    <string name="settings_bid">Automatically buy when the price hits</string>
     <string name="settings_notification">Receive alerts when prices change</string>
 </resources>
