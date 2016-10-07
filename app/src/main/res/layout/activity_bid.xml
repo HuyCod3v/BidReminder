@@ -74,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/item_margin_top"
                 android:layout_height="wrap_content"
+                android:id="@+id/cbIsBuyAutomatically"
                 android:text="@string/settings_bid">
             </CheckBox>
 

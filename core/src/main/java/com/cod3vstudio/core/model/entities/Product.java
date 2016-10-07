@@ -1,5 +1,7 @@
 package com.cod3vstudio.core.model.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigDecimal;
 
 /**
@@ -9,16 +11,28 @@ public class Product {
 
     //region Properties
 
+    @SerializedName("id")
     private int id;
 
+    @SerializedName("item_id")
+    private String itemId;
+
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("image")
     private String image;
 
+    @SerializedName("price")
     private double price;
 
+    @SerializedName("repository_id")
+    private int repositoryId;
+
+    @SerializedName("currency_unit")
     private String currencyUnit;
 
+    @SerializedName("description")
     private String description;
 
     //endregion
@@ -71,6 +85,22 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getRepositoryId() {
+        return repositoryId;
+    }
+
+    public void setRepositoryId(int repositoryId) {
+        this.repositoryId = repositoryId;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     //endregion

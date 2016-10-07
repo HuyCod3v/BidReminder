@@ -6,15 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 import com.cod3vstudio.bidreminder.App;
 import com.cod3vstudio.bidreminder.BR;
 import com.cod3vstudio.bidreminder.R;
 import com.cod3vstudio.bidreminder.databinding.ActivityBidBinding;
+import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseActivity;
 import com.cod3vstudio.core.viewmodel.BidViewModel;
 
 public class BidActivity extends BaseActivity<ActivityBidBinding, BidViewModel> {
+
+    private CheckBox mCBIsBuyAutomatically;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,8 @@ public class BidActivity extends BaseActivity<ActivityBidBinding, BidViewModel> 
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
 
+        mCBIsBuyAutomatically = (CheckBox) findViewById(R.id.cbIsBuyAutomatically);
+
     }
 
     @Override
@@ -42,7 +48,14 @@ public class BidActivity extends BaseActivity<ActivityBidBinding, BidViewModel> 
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
+                break;
+            case R.id.action_bid:
+                if (mViewModel.isSignedUserAvailable()) {
+                    mViewModel.bid(mCBIsBuyAutomatically.isChecked());
+                } else {
+                    mViewModel.getNavigator().navigateTo(Constants.SIGN_IN_PAGE);
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -54,8 +54,8 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    BiddingViewModel providesBiddingViewModel(INavigator navigator) {
-        return new BiddingViewModel(navigator);
+    BiddingViewModel providesBiddingViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new BiddingViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides
@@ -66,8 +66,8 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    HomeViewModel providesHomeViewModel(INavigator navigator) {
-        return new HomeViewModel(navigator);
+    HomeViewModel providesHomeViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new HomeViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides
