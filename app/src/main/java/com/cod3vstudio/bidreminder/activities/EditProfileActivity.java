@@ -2,9 +2,12 @@ package com.cod3vstudio.bidreminder.activities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.cod3vstudio.bidreminder.App;
 import com.cod3vstudio.bidreminder.BR;
@@ -30,6 +33,11 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
 
         setTitle(getString(R.string.edit_profile));
 
+        AppCompatAutoCompleteTextView txtNation = (AppCompatAutoCompleteTextView) findViewById(R.id.txtNation);
+        String[] countries  = getResources().getStringArray(R.array.countries);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+        txtNation.setAdapter(adapter);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
@@ -41,7 +49,10 @@ public class EditProfileActivity extends BaseActivity<ActivityEditProfileBinding
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
+                break;
+            case R.id.action_update:
+                mViewModel.updateProfileCommand();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

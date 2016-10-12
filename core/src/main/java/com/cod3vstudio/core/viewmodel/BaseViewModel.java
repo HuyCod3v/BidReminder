@@ -2,8 +2,11 @@ package com.cod3vstudio.core.viewmodel;
 
 import android.app.Activity;
 import android.databinding.BaseObservable;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
+import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.view.INavigator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -96,6 +99,7 @@ public abstract class BaseViewModel extends BaseObservable implements IViewModel
     protected final void showMessage(String message) {
         Toast.makeText(getNavigator().getApplication().getCurrentActivity(), message, Toast.LENGTH_LONG).show();
     }
+
 
     //endregion
 

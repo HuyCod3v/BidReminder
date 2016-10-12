@@ -2,7 +2,9 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.cod3vstudio.core.viewmodel.EditProfileViewModel"/>
@@ -20,82 +22,82 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/normal_activity_padding"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/normal_activity_padding">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edit_profile_item_margin_top">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hà Quang Huy"
-                    android:textSize="14sp"
-                    android:hint="Name"/>
+                    android:hint="Name"
+                    android:text="@={viewModel.name}"
+                    android:textSize="14sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edit_profile_item_margin_top">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:text="quanghuycod3v@gmail.com"
-                    android:hint="Email"/>
+                    android:hint="Email"
+                    android:text="@={viewModel.email}"
+                    android:textSize="14sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edit_profile_item_margin_top">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:hint="Phone"
                     android:inputType="phone"
-                    android:textSize="14sp"
-                    android:hint="Phone"/>
+                    android:text="@={viewModel.phone}"
+                    android:textSize="14sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edit_profile_item_margin_top">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="14sp"
-                    android:hint="Address"/>
+                    android:hint="Address"
+                    android:text="@={viewModel.address}"
+                    android:textSize="14sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/edit_profile_item_margin_top"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edit_profile_item_margin_top">
 
-                <EditText
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/txtNation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="14sp"
-                    android:hint="Nation"/>
+                    android:hint="Nation"
+                    android:text="@={viewModel.nation}"
+                    android:textSize="14sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
-
 
 
     </LinearLayout>

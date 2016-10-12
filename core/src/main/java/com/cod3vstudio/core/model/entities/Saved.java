@@ -10,8 +10,9 @@ public class Saved extends RealmObject {
 
     //region Properties
 
-    @PrimaryKey
-    private int id;
+    private String itemId;
+
+    private int repositoryId;
 
     private String name;
 
@@ -27,12 +28,20 @@ public class Saved extends RealmObject {
 
     //region Getters and Setters
 
-    public int getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public int getRepositoryId() {
+        return repositoryId;
+    }
+
+    public void setRepositoryId(int repositoryId) {
+        this.repositoryId = repositoryId;
     }
 
     public String getName() {

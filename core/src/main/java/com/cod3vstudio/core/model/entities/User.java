@@ -25,6 +25,15 @@ public class User extends RealmObject {
     @SerializedName("email")
     private String email;
 
+    @SerializedName("phone")
+    private String phone;
+
+    @SerializedName("address")
+    private String address;
+
+    @SerializedName("nation")
+    private String nation;
+
     //endregion
 
     //region Getter and Setter
@@ -59,6 +68,30 @@ public class User extends RealmObject {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
     }
 
     //endregion

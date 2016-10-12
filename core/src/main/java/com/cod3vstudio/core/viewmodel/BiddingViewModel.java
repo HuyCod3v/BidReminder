@@ -1,13 +1,16 @@
 package com.cod3vstudio.core.viewmodel;
 
+import android.app.Activity;
 import android.databinding.Bindable;
 
 import com.cod3vstudio.core.BR;
+import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.Product;
 import com.cod3vstudio.core.model.responses.APIResponse;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.util.Constants;
+import com.cod3vstudio.core.view.ICallback;
 import com.cod3vstudio.core.view.INavigator;
 
 import java.util.ArrayList;
@@ -85,7 +88,7 @@ public class BiddingViewModel extends BaseViewModel {
     //region Public methods
 
     public void loadBiddingProducts() {
-        getNavigator().showBusyIndicator("Đang tải");
+        getNavigator().showBusyIndicator(getCurrentActivity().getString(R.string.loading));
         mServiceComponent.getBiddingService().findByUser(getNavigator().getApplication().getSignedInUser().getId())
                 .enqueue(new Callback<APIResponse<List<Product>>>() {
                     @Override
@@ -93,14 +96,14 @@ public class BiddingViewModel extends BaseViewModel {
                         if (response.isSuccessful() && response.body() != null & response.body().isSuccess()) {
                             setProducts(response.body().getData());
                         } else {
-                            showMessage("Loi 1");
+                            showMessage(getCurrentActivity().getString(R.string.error_occurred));
                         }
                         getNavigator().hideBusyIndicator();
                     }
 
                     @Override
                     public void onFailure(Call<APIResponse<List<Product>>> call, Throwable t) {
-                        showMessage("Loi 2");
+                        showMessage(getCurrentActivity().getString(R.string.error_occurred));
                         getNavigator().hideBusyIndicator();
                     }
                 });
@@ -109,7 +112,48 @@ public class BiddingViewModel extends BaseViewModel {
     public void showProductDetailsCommand(Product product) {
         postSticky(product);
         getNavigator().navigateTo(Constants.PRODUCT_PAGE);
+    }
 
+    public void deleteBiddingCommand(final Product deleteBiddingProduct) {
+        Activity currentActivity = getCurrentActivity();
+        getNavigator().showMessage(getCurrentActivity().getString(R.string.attention)
+                , currentActivity.getString(R.string.cancel_aution_message)
+                , getCurrentActivity().getString(R.string.yes)
+                , getCurrentActivity().getString(R.string.no)
+                , new ICallback() {
+                    @Override
+                    public void onResult(Object result) {
+                        boolean isAgreed = (boolean) result;
+                        if (isAgreed) {
+                            mServiceComponent.getBiddingService().delete(deleteBiddingProduct.getBiddingId()).enqueue(new Callback<APIResponse<Integer>>() {
+                                @Override
+                                public void onResponse(Call<APIResponse<Integer>> call, Response<APIResponse<Integer>> response) {
+                                    if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                                        for (Product product : mProducts) {
+                                            if (product.getId() == deleteBiddingProduct.getId()) {
+                                                mProducts.remove(product);
+                                                break;
+                                            }
+                                        }
+                                        notifyPropertyChanged(BR.products);
+                                    } else {
+                                        showMessage(getCurrentActivity().getString(R.string.error_occurred));
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<APIResponse<Integer>> call, Throwable t) {
+                                    showMessage(getCurrentActivity().getString(R.string.error_occurred));
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+                });
     }
 
     //endregion

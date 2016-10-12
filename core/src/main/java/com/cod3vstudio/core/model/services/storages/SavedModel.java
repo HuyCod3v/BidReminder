@@ -23,19 +23,11 @@ public class SavedModel implements ISavedModel {
     }
 
     @Override
-    public void update(Saved element) {
+    public void delete(String itemId, int repositoryId) {
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-
-        realm.copyToRealmOrUpdate(element);
-
-        realm.commitTransaction();
-    }
-
-    @Override
-    public void delete(int id) {
-        Realm realm = Realm.getDefaultInstance();
-        Saved saved = realm.where(Saved.class).equalTo("id", id).findFirst();
+        Saved saved = realm.where(Saved.class).equalTo("itemId", itemId)
+                .equalTo("repositoryId", repositoryId)
+                .findFirst();
 
         if (hasResult(saved)) {
             realm.beginTransaction();
@@ -47,9 +39,11 @@ public class SavedModel implements ISavedModel {
     }
 
     @Override
-    public Saved find(int id) {
+    public Saved find(String itemId, int repositoryId) {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(Saved.class).equalTo("id", id).findFirst();
+        return realm.where(Saved.class).equalTo("itemId", itemId)
+                .equalTo("repositoryId", repositoryId)
+                .findFirst();
     }
 
     private boolean hasResult(Saved element) {

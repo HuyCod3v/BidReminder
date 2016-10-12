@@ -37,4 +37,9 @@
     <string name="bid_price">Mua với giá</string>
     <string name="settings_bid">Tự động mua khi giá chạm mốc</string>
     <string name="settings_notification">Nhận thông báo khi giá sản phẩm thay đổi</string>
+    <string-array name="countries">
+        <item>England</item>
+        <item>Vietnam</item>
+        <item>Singapore</item>
+    </string-array>
 </resources>

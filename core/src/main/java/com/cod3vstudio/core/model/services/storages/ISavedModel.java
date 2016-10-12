@@ -11,11 +11,9 @@ public interface ISavedModel {
 
     void add(Saved element);
 
-    void delete(int id);
+    void delete(String itemId, int repositoryId);
 
-    void update(Saved element);
-
-    Saved find(int id);
+    Saved find(String itemId, int repositoryId);
 
     List<Saved> findAll();
 

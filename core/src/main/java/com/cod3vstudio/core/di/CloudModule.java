@@ -1,6 +1,7 @@
 package com.cod3vstudio.core.di;
 
 import com.cod3vstudio.core.model.services.clouds.IBiddingService;
+import com.cod3vstudio.core.model.services.clouds.ICartService;
 import com.cod3vstudio.core.model.services.clouds.IProductService;
 import com.cod3vstudio.core.model.services.clouds.IUserService;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
@@ -68,11 +69,24 @@ public class CloudModule {
         return retrofit.create(IBiddingService.class);
     }
 
+    @Provides
+    @Singleton
+    public ICartService providesCartService() {
+        Gson gson = createGson();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Configuration.BID_REMINDER_API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        return retrofit.create(ICartService.class);
+    }
+
 
     @Provides
     @Singleton
-    public ServiceComponent providesServiceComponent(IUserService userService, IProductService productService, IBiddingService biddingService) {
-        return new ServiceComponent(userService, productService, biddingService);
+    public ServiceComponent providesServiceComponent(IUserService userService, IProductService productService, IBiddingService biddingService, ICartService cartService) {
+        return new ServiceComponent(userService, productService, biddingService, cartService);
     }
 
     //endregion

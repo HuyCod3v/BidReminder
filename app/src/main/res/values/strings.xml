@@ -38,4 +38,9 @@
     <string name="bid_price">Bid price</string>
     <string name="settings_bid">Automatically buy when the price hits</string>
     <string name="settings_notification">Receive alerts when prices change</string>
+    <string-array name="countries">
+        <item>England</item>
+        <item>Vietnam</item>
+        <item>Singapore</item>
+    </string-array>
 </resources>

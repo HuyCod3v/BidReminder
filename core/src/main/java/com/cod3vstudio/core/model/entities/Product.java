@@ -35,6 +35,18 @@ public class Product {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("bid_price")
+    private double bidPrice;
+
+    @SerializedName("bidding_id")
+    private int biddingId;
+
+    @SerializedName("cart_id")
+    private int cartId;
+
+    @SerializedName("buy_price")
+    private double buyPrice;
+
     //endregion
 
     //region Getters and Setters
@@ -101,6 +113,38 @@ public class Product {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public double getBidPrice() {
+        return bidPrice;
+    }
+
+    public void setBidPrice(double bidPrice) {
+        this.bidPrice = bidPrice;
+    }
+
+    public double getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(double buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public int getBiddingId() {
+        return biddingId;
+    }
+
+    public void setBiddingId(int biddingId) {
+        this.biddingId = biddingId;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     //endregion

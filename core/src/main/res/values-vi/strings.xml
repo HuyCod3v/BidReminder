@@ -8,4 +8,16 @@
     <string name="account_registration_error">Lỗi đăng ký tài khoản</string>
     <string name="account_login_failures">Đăng nhập tài khoản thất bại</string>
     <string name="logged_in_successfully">Đăng nhập thành công</string>
+    <string name="bid_successfully">Chúc mừng, bạn đã đấu giá sản phẩm thành công</string>
+    <string name="error_occurred">Có lỗi xảy ra. Vui lòng thử lại</string>
+    <string name="loading">Đang tải...</string>
+    <string name="cancel_aution_message">Bạn có muốn kết thúc đấu giá sản phẩm?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="attention">Chú ý!</string>
+    <string name="do_you_want_to_buy">Bạn có muốn mua sản phẩm </string>
+    <string name="for_price"> với giá </string>
+    <string name="contact_for_transaction">. Chúng tôi sẽ liên lạc với bạn để thực hiện giao dịch.</string>
+    <string name="fill_in_information">Làm ơn điền đầy đủ thông tin số điện thoại, email và địa chỉ liên hệ</string>
+    <string name="buy_successfully">Chúc mừng, bạn đã mua sản phẩm thành công</string>
 </resources>

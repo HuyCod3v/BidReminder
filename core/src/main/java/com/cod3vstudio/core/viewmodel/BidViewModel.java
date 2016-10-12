@@ -3,6 +3,7 @@ package com.cod3vstudio.core.viewmodel;
 import android.databinding.Bindable;
 
 import com.cod3vstudio.core.BR;
+import com.cod3vstudio.core.R;
 import com.cod3vstudio.core.model.entities.Bidding;
 import com.cod3vstudio.core.model.entities.Product;
 import com.cod3vstudio.core.model.responses.APIResponse;
@@ -117,7 +118,7 @@ public class BidViewModel extends BaseViewModel {
     public void bid(boolean isBuyAutomatically) {
         int isBuyAutomaticallyInt = isBuyAutomatically ? 1 : 0;
         Bidding bidding = initiateBidding(isBuyAutomatically);
-        getNavigator().showBusyIndicator("Đang tải");
+        getNavigator().showBusyIndicator(getCurrentActivity().getString(R.string.loading));
         mServiceComponent.getBiddingService().add(bidding.getBidPrice()
                 , bidding.getLastPrice()
                 , isBuyAutomaticallyInt
@@ -127,21 +128,22 @@ public class BidViewModel extends BaseViewModel {
                 , mProduct.getName()
                 , mProduct.getImage()
                 , mProduct.getCurrencyUnit()
-                , "Des")
+                , "...")
                 .enqueue(new Callback<APIResponse<Bidding>>() {
             @Override
             public void onResponse(Call<APIResponse<Bidding>> call, Response<APIResponse<Bidding>> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    showMessage("Success");
+                    showMessage(getCurrentActivity().getString(R.string.bid_successfully));
+                    getNavigator().goBack();
                 } else {
-                    showMessage("Fail 1");
+                    showMessage(getCurrentActivity().getString(R.string.error_occurred));
                 }
                 getNavigator().hideBusyIndicator();
             }
 
             @Override
             public void onFailure(Call<APIResponse<Bidding>> call, Throwable t) {
-                showMessage("Fail2");
+                showMessage(getCurrentActivity().getString(R.string.error_occurred));
                 getNavigator().hideBusyIndicator();
             }
         });

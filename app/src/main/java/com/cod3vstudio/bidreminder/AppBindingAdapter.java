@@ -70,6 +70,9 @@ public class AppBindingAdapter {
 
     @BindingAdapter(value = {"imageUrl"})
     public static void loadImage(ImageView view, String url) {
+        if (url == null || url.equals("")) {
+            return;
+        }
         Picasso.with(view.getContext())
                 .load(url)
                 .into(view);

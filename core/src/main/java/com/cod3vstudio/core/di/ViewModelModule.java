@@ -60,8 +60,8 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    CartViewModel providesCartViewModel(INavigator navigator) {
-        return new CartViewModel(navigator);
+    CartViewModel providesCartViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new CartViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides

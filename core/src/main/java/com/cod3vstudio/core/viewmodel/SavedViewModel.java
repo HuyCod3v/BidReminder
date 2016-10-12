@@ -94,8 +94,8 @@ public class SavedViewModel extends BaseViewModel {
     }
 
     public void showProductDetailsCommand(Saved saved) {
-        postSticky(saved);
         getNavigator().navigateTo(Constants.PRODUCT_PAGE);
+        postSticky(saved);
     }
 
     //endregion

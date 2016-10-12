@@ -85,6 +85,8 @@ public class Navigator implements INavigator {
             Activity currentActivity = mApplication.getCurrentActivity();
 
             new AlertDialog.Builder(currentActivity)
+                    .setMessage(message)
+                    .setTitle(title)
                     .setNegativeButton(buttonText, new DialogInterface.OnClickListener() {
 
                         @Override
@@ -114,6 +116,8 @@ public class Navigator implements INavigator {
             Activity currentActivity = mApplication.getCurrentActivity();
 
             new AlertDialog.Builder(currentActivity)
+                    .setMessage(message)
+                    .setTitle(title)
                     .setPositiveButton(buttonConfirmText, new DialogInterface.OnClickListener() {
 
                         @Override

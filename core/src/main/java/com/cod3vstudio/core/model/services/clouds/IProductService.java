@@ -16,4 +16,7 @@ public interface IProductService {
 
     @GET("/api/products")
     Call<APIResponse<List<Product>>> search(@Query("name") String name, @Query("limit") long limit, @Query("offset") long offset);
+
+    @GET("/api/products")
+    Call<APIResponse<List<Product>>> getPromotion(@Query("limit") long limit, @Query("offset") long offset);
 }

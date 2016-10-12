@@ -2,6 +2,9 @@ package com.cod3vstudio.bidreminder.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,10 +27,13 @@ import com.cod3vstudio.bidreminder.adapters.CartListAdapter;
 import com.cod3vstudio.bidreminder.adapters.HomeListAdapter;
 import com.cod3vstudio.bidreminder.databinding.FragmentHomeBinding;
 import com.cod3vstudio.bidreminder.util.EndlessScrollRecyclerViewListener;
+import com.cod3vstudio.core.model.entities.Page;
 import com.cod3vstudio.core.util.Configuration;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseFragment;
 import com.cod3vstudio.core.viewmodel.HomeViewModel;
+
+import org.greenrobot.eventbus.Subscribe;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
 
@@ -36,6 +42,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     private HomeListAdapter mHomeListAdapter;
     private SearchView mSearchView;
     private String mName;
+    private RecyclerView mRecyclerView;
+    private CoordinatorLayout mCoordinatorLayout;
+    private EndlessScrollRecyclerViewListener mEndlessScrollRecyclerViewListener;
+    private Snackbar mSnackbar;
 
     //endregion
 
@@ -52,16 +62,26 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         App.sharedComponent().inject(this);
-
+        register();
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
         getActivity().setTitle(getString(R.string.app_name));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mName != null && !mName.equals("")) {
+            getActivity().setTitle(mName);
+        } else {
+            getActivity().setTitle(getString(R.string.app_name));
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unregister();
     }
 
     @Override
@@ -70,24 +90,29 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         setBindingContentView(inflater, container, R.layout.fragment_home, BR.viewModel);
 
         View view =  mViewDataBinding.getRoot();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
-
+        mRecyclerView= (RecyclerView) view.findViewById(R.id.product_recycler_view);
+        mCoordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinatorLayout);
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mHomeListAdapter = new HomeListAdapter();
         mHomeListAdapter.setViewModel(mViewModel);
-        recyclerView.setAdapter(mHomeListAdapter);
-        recyclerView.addOnScrollListener(new EndlessScrollRecyclerViewListener(layoutManager) {
+        mRecyclerView.setAdapter(mHomeListAdapter);
+        mEndlessScrollRecyclerViewListener = new EndlessScrollRecyclerViewListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
+                dismissTryAgainAlert();
                 if (mName != null && !mName.equals("")) {
                     mViewModel.loadProducts(mName, Configuration.ITEMS_PER_PAGE, page);
+                } else {
+                    mViewModel.loadPromotion(Configuration.ITEMS_PER_PAGE, page);
                 }
             }
-        });
+        };
+
+        mRecyclerView.addOnScrollListener(mEndlessScrollRecyclerViewListener);
         return view;
     }
 
@@ -99,6 +124,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                dismissTryAgainAlert();
+                mRecyclerView.scrollToPosition(0);
                 mViewModel.loadProducts(query, Configuration.ITEMS_PER_PAGE, 1);
                 mName = query;
                 mSearchView.clearFocus();
@@ -131,5 +158,31 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
     //endregion
+
+    @Subscribe
+    public void event(final Page page) {
+        mSnackbar = Snackbar
+                .make(mCoordinatorLayout, page.getMessage(), Snackbar.LENGTH_INDEFINITE)
+                .setAction(page.getAction(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (page.getName() == null) {
+                            mViewModel.loadPromotion(Configuration.ITEMS_PER_PAGE, page.getPageNumber());
+                        } else {
+                            mViewModel.loadProducts(page.getName(), Configuration.ITEMS_PER_PAGE, page.getPageNumber());
+                        }
+                    }
+                });
+
+        mSnackbar.show();
+
+    }
+
+    private void dismissTryAgainAlert() {
+        if (mSnackbar != null && mSnackbar.isShown()) {
+            mSnackbar.dismiss();
+            mSnackbar = null;
+        }
+    }
 
 }

@@ -84,7 +84,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
-                                android:text="Hà Quang Huy"
+                                android:text="@{viewModel.user.name}"
                                 android:id="@+id/txtName" />
 
                         </LinearLayout>
@@ -106,7 +106,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
-                                android:text="quanghuycod3v@gmail.com"
+                                android:text="@{viewModel.user.email}"
                                 android:id="@+id/txtEmail" />
 
                         </LinearLayout>
@@ -128,7 +128,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
-                                android:text="+84937092814"
+                                android:text="@{viewModel.user.phone}"
                                 android:id="@+id/txtPhone" />
 
                         </LinearLayout>
@@ -150,7 +150,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
-                                android:text="K47, Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng"
+                                android:text="@{viewModel.user.address}"
                                 android:id="@+id/txtAddress" />
 
                         </LinearLayout>
@@ -172,7 +172,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
-                                android:text="Vietnam"
+                                android:text="@{viewModel.user.nation}"
                                 android:id="@+id/txtNation" />
 
                         </LinearLayout>

@@ -1,7 +1,10 @@
 package com.cod3vstudio.core.viewmodel;
 
 import android.content.Intent;
+import android.databinding.Bindable;
 
+import com.cod3vstudio.core.BR;
+import com.cod3vstudio.core.model.entities.User;
 import com.cod3vstudio.core.model.services.clouds.ServiceComponent;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
 import com.cod3vstudio.core.util.Constants;
@@ -15,6 +18,8 @@ public class ProfileViewModel extends BaseViewModel {
     //region Properties
 
     private ServiceComponent mServiceComponent;
+
+    private User user;
 
     private ModelComponent mModelComponent;
 
@@ -30,6 +35,21 @@ public class ProfileViewModel extends BaseViewModel {
 
     //endregion
 
+    //region Getters and Setters
+
+    @Bindable
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        notifyPropertyChanged(BR.user);
+    }
+
+
+    //endregion
+
     //region Lifecycle
 
     @Override
@@ -40,6 +60,7 @@ public class ProfileViewModel extends BaseViewModel {
     @Override
     public void onStart() {
         super.onStart();
+        setUser(getNavigator().getApplication().getSignedInUser());
     }
 
     @Override

@@ -7,6 +7,7 @@
     <color name="colorTextPrimary">#000000</color>
     <color name="colorTextLight">#9E9E9E</color>
     <color name="colorTextPrice">#0288D1</color>
+    <color name="colorTextBidPrice">#FF5722</color>
     <color name="colorCircleChart">#FF5722</color>
     <color name="colorChart">#7B1FA2</color>
 </resources>

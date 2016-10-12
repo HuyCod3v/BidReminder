@@ -42,7 +42,9 @@ public class EditPasswordActivity extends BaseActivity<ActivityEditPasswordBindi
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
+                break;
+            case R.id.action_update:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -76,6 +76,7 @@ public class ProductActivity extends BaseActivity<ActivityProductBinding, Produc
 
                 break;
             case R.id.action_buy:
+                mViewModel.buyProductCommand();
                 break;
         }
 
