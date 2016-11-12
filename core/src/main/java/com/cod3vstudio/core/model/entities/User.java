@@ -12,6 +12,8 @@ public class User extends RealmObject {
 
     //region Properties
 
+    public static final String TOKEN = "AWTToken";
+
     @PrimaryKey
     @SerializedName("id")
     private int id;
@@ -33,6 +35,9 @@ public class User extends RealmObject {
 
     @SerializedName("nation")
     private String nation;
+
+    @SerializedName("remember_token")
+    private String rememberToken;
 
     //endregion
 
@@ -92,6 +97,14 @@ public class User extends RealmObject {
 
     public void setNation(String nation) {
         this.nation = nation;
+    }
+
+    public String getRememberToken() {
+        return rememberToken;
+    }
+
+    public void setRememberToken(String rememberToken) {
+        this.rememberToken = rememberToken;
     }
 
     //endregion

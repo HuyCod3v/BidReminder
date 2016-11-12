@@ -20,4 +20,5 @@
     <string name="contact_for_transaction">. Chúng tôi sẽ liên lạc với bạn để thực hiện giao dịch.</string>
     <string name="fill_in_information">Làm ơn điền đầy đủ thông tin số điện thoại, email và địa chỉ liên hệ</string>
     <string name="buy_successfully">Chúc mừng, bạn đã mua sản phẩm thành công</string>
+    <string name="storate_permission_notice">Bạn phải cung cấp quyền hệ thống để đọc file</string>
 </resources>

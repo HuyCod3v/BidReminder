@@ -36,8 +36,8 @@ public class ViewModelModule {
 
     @Provides
     @Singleton
-    MainViewModel providesMainViewModel(INavigator navigator) {
-        return new MainViewModel(navigator);
+    MainViewModel providesMainViewModel(INavigator navigator, ModelComponent modelComponent, ServiceComponent serviceComponent) {
+        return new MainViewModel(navigator, modelComponent, serviceComponent);
     }
 
     @Provides

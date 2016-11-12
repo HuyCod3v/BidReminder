@@ -1,17 +1,25 @@
 package com.cod3vstudio.bidreminder.activities;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.cod3vstudio.bidreminder.App;
 import com.cod3vstudio.bidreminder.BR;
 import com.cod3vstudio.bidreminder.R;
 import com.cod3vstudio.bidreminder.databinding.ActivityProfileBinding;
 import com.cod3vstudio.bidreminder.databinding.ActivitySignInBinding;
+import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseActivity;
 import com.cod3vstudio.core.viewmodel.ProfileViewModel;
 import com.cod3vstudio.core.viewmodel.SignInViewModel;
@@ -50,6 +58,39 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.PICK_IMAGE_COMMAND && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            ImageView imageView = (ImageView) findViewById(R.id.img_avatar);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            mViewModel.uploadAvatar(picturePath);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults){
+
+        switch(permsRequestCode){
+            case 200:
+                boolean readStorageAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+
+                if (readStorageAccepted) {
+                    mViewModel.pickImage();
+                }
+                break;
+
+        }
+
     }
 
     //endregion

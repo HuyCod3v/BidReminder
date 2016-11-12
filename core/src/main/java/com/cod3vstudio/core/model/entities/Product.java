@@ -41,6 +41,9 @@ public class Product {
     @SerializedName("bidding_id")
     private int biddingId;
 
+    @SerializedName("is_buy_automatically")
+    private boolean isBuyAumomatically;
+
     @SerializedName("cart_id")
     private int cartId;
 
@@ -133,6 +136,14 @@ public class Product {
 
     public int getBiddingId() {
         return biddingId;
+    }
+
+    public boolean isBuyAumomatically() {
+        return isBuyAumomatically;
+    }
+
+    public void setBuyAumomatically(boolean buyAumomatically) {
+        isBuyAumomatically = buyAumomatically;
     }
 
     public void setBiddingId(int biddingId) {

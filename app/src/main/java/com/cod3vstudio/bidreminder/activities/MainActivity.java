@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(new HomeFragment());
+
+        mViewModel.signInIfRemembered();
     }
 
     @Override

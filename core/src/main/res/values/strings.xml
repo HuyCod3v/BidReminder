@@ -20,4 +20,5 @@
     <string name="contact_for_transaction">. We will contact you to conduct transaction.</string>
     <string name="fill_in_information">Please fill in the phone number, email and address</string>
     <string name="buy_successfully">Congratulations, you have successfully bought the product</string>
+    <string name="storate_permission_notice">You must provide storage permissions to access file</string>
 </resources>
