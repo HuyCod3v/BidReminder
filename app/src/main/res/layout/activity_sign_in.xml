@@ -49,6 +49,8 @@
                     android:background="#ffffff"
                     android:hint="@string/email"
                     android:padding="10dp"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
                     android:text="@={viewModel.email}"
                     android:textSize="15sp"
                     android:layout_marginBottom="10dp"
