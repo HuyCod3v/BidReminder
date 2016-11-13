@@ -126,6 +126,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             public boolean onQueryTextSubmit(String query) {
                 dismissTryAgainAlert();
                 mRecyclerView.scrollToPosition(0);
+                if (query == null || query.equals("")) {
+                    return false;
+                }
                 mViewModel.loadProducts(query, Configuration.ITEMS_PER_PAGE, 1);
                 mName = query;
                 mSearchView.clearFocus();

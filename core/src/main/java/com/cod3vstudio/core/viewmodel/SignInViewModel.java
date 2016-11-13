@@ -2,6 +2,7 @@ package com.cod3vstudio.core.viewmodel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.cod3vstudio.core.R;
@@ -134,6 +135,8 @@ public class SignInViewModel extends BaseViewModel {
                     }
 
                     getNavigator().hideBusyIndicator();
+
+                    updateFirebaseToken();
                 }
 
                 @Override
@@ -143,6 +146,31 @@ public class SignInViewModel extends BaseViewModel {
                 }
             });
         }
+    }
+
+    private void updateFirebaseToken() {
+        SharedPreferences sharedPreferences = getCurrentActivity().getSharedPreferences(Configuration.APP_PREFS, Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString(Configuration.FIREBASE_TOKEN_DEF, "");
+
+        if (token.equals("")) {
+            return;
+        }
+
+        mServiceComponent.getUserService().updateFirebaseToken(getNavigator().getApplication().getSignedInUser().getId(), token).enqueue(new Callback<APIResponse<User>>() {
+            @Override
+            public void onResponse(Call<APIResponse<User>> call, Response<APIResponse<User>> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    Log.d("Firebase", response.body().getData().toString());
+                } else {
+                    Log.d("Firebase", "Update firebase token failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<APIResponse<User>> call, Throwable t) {
+                Log.d("Firebase", "Update firebase token failed");
+            }
+        });
     }
 
     private void cacheUserToken(String token) {

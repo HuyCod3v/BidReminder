@@ -29,7 +29,7 @@ public interface IUserService {
     Call<APIResponse<User>> reSignIn(@Query("remember_token") String rememberToken);
 
     @GET("/api/authenticate/sign-up")
-    Call<APIResponse<Boolean>> signUp(@Query("email") String email, @Query("password") String password, @Query("name") String name);
+    Call<APIResponse<Boolean>> signUp(@Query("email") String email, @Query("password") String password, @Query("name") String name, @Query("firebase_token") String firebaseToken);
 
     @FormUrlEncoded
     @PUT("/api/users/{id}")
@@ -39,6 +39,10 @@ public interface IUserService {
     @FormUrlEncoded
     @PUT("/api/users/{id}")
     Call<APIResponse<User>> updatePassword(@Path("id") int id, @Field("password") String password);
+
+    @FormUrlEncoded
+    @PUT("/api/users/{id}")
+    Call<APIResponse<User>> updateFirebaseToken(@Path("id") int id, @Field("firebase_token") String firebaseToken);
 
     @Multipart
     @POST("/api/users/upload-avatar/{id}")

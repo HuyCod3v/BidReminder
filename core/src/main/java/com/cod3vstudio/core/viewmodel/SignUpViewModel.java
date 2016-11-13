@@ -149,7 +149,7 @@ public class SignUpViewModel extends BaseViewModel {
             User user = initUser();
             getNavigator().showBusyIndicator(getCurrentActivity().getString(R.string.signing_up));
 
-            mServiceComponent.getUserService().signUp(user.getEmail(), user.getPassword(), user.getName()).enqueue(new Callback<APIResponse<Boolean>>() {
+            mServiceComponent.getUserService().signUp(user.getEmail(), user.getPassword(), user.getName(), "...").enqueue(new Callback<APIResponse<Boolean>>() {
                 @Override
                 public void onResponse(Call<APIResponse<Boolean>> call, Response<APIResponse<Boolean>> response) {
                     if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
