@@ -29,7 +29,7 @@ public interface IUserService {
     Call<APIResponse<User>> reSignIn(@Query("remember_token") String rememberToken);
 
     @GET("/api/authenticate/sign-up")
-    Call<APIResponse<Boolean>> signUp(@Query("email") String email, @Query("password") String password, @Query("name") String name, @Query("firebase_token") String firebaseToken);
+    Call<APIResponse<Boolean>> signUp(@Query("email") String email, @Query("password") String password, @Query("name") String name);
 
     @FormUrlEncoded
     @PUT("/api/users/{id}")
