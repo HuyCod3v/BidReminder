@@ -21,4 +21,6 @@
     <string name="fill_in_information">Please fill in the phone number, email and address</string>
     <string name="buy_successfully">Congratulations, you have successfully bought the product</string>
     <string name="storate_permission_notice">You must provide storage permissions to access file</string>
+    <string name="confirm_signout">Are you sure you want to sign out this entry?</string>
+    <string name="title_signout">Sign out</string>
 </resources>

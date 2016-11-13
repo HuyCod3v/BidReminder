@@ -44,6 +44,7 @@ public class EditPasswordActivity extends BaseActivity<ActivityEditPasswordBindi
                 onBackPressed();
                 break;
             case R.id.action_update:
+                mViewModel.changePassword();
                 break;
         }
         return super.onOptionsItemSelected(item);
