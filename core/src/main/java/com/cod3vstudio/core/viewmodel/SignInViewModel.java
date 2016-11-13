@@ -129,6 +129,7 @@ public class SignInViewModel extends BaseViewModel {
                         getNavigator().goBack();
                         getNavigator().getApplication().setSignedInUser(response.body().getData());
                         cacheUserToken(response.body().getData().getRememberToken());
+                        postSticky(response.body().getData());
                         showMessage(getCurrentActivity().getString(R.string.logged_in_successfully));
                     } else {
                         showMessage(getCurrentActivity().getString(R.string.incorrect_account));

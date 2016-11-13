@@ -2,7 +2,6 @@ package com.cod3vstudio.bidreminder.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -12,13 +11,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.cod3vstudio.bidreminder.App;
 import com.cod3vstudio.bidreminder.BR;
 import com.cod3vstudio.bidreminder.R;
 import com.cod3vstudio.bidreminder.databinding.ActivityMainBinding;
+import com.cod3vstudio.bidreminder.databinding.NavHeaderMainBinding;
 import com.cod3vstudio.bidreminder.fragments.BiddingFragment;
 import com.cod3vstudio.bidreminder.fragments.CartFragment;
 import com.cod3vstudio.bidreminder.fragments.HomeFragment;
@@ -26,8 +26,6 @@ import com.cod3vstudio.bidreminder.fragments.SavedFragment;
 import com.cod3vstudio.core.util.Constants;
 import com.cod3vstudio.core.view.BaseActivity;
 import com.cod3vstudio.core.viewmodel.MainViewModel;
-
-import java.util.Locale;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel>
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +51,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.inflate(LayoutInflater.from(navigationView.getContext()));
+        navHeaderMainBinding.setVariable(BR.viewModel,mViewModel);
+        navigationView.addHeaderView(navHeaderMainBinding.getRoot());
+        navHeaderMainBinding.executePendingBindings();
 
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(new HomeFragment());
