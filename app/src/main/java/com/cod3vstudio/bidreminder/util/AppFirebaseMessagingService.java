@@ -20,19 +20,27 @@ import com.google.firebase.messaging.RemoteMessage;
 public class AppFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FIREBASE";
 
+    private static final String CHANGE_PRICE_MESSAGE = "ChangePrice";
+    private static final String BUY_PRODUCT_MESSAGE = "BuyProduct";
+    private static final String REACH_BID_PRICE_MESSAGE = "ReachBidPrice";
+    private static final String MESSAGE_TYPE = "MessageType";
+    private static final String MESSAGE_CONTENT = "Content";
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        //Displaying data in log
-        //It is optional
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
-
-        //Calling method to generate notification
-        sendNotification(remoteMessage.getNotification().getBody());
+        String messageType = remoteMessage.getData().get(MESSAGE_TYPE);
+        if (messageType.equals(CHANGE_PRICE_MESSAGE)) {
+            String messageContent = remoteMessage.getData().get(MESSAGE_CONTENT);
+            sendNotification(messageContent);
+        } else if (messageType.equals(BUY_PRODUCT_MESSAGE)) {
+            String messageContent = remoteMessage.getData().get(MESSAGE_CONTENT);
+            sendNotification(messageContent);
+        } else if (messageType.equals(REACH_BID_PRICE_MESSAGE)) {
+            String messageContent = remoteMessage.getData().get(MESSAGE_CONTENT);
+            sendNotification(messageContent);
+        }
     }
 
-    //This method is only generating push notification
-    //It is same as we did in earlier posts
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -40,12 +48,20 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.setBigContentTitle(getString(R.string.app_name));
+        bigTextStyle.bigText(messageBody);
+
+
+
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Firebase Push Notification")
+                .setContentTitle(getString(R.string.app_name))
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setStyle(bigTextStyle)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
