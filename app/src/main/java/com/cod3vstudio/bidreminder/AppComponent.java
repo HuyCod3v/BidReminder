@@ -16,6 +16,7 @@ import com.cod3vstudio.bidreminder.fragments.CategoryFragment;
 import com.cod3vstudio.bidreminder.fragments.HomeFragment;
 import com.cod3vstudio.bidreminder.fragments.SavedFragment;
 import com.cod3vstudio.bidreminder.util.AppFirebaseInstanceIDService;
+import com.cod3vstudio.bidreminder.util.AppFirebaseMessagingService;
 import com.cod3vstudio.core.di.ViewModelModule;
 
 import javax.inject.Singleton;
@@ -69,4 +70,5 @@ public interface AppComponent {
     //endregion
 
     void inject(AppFirebaseInstanceIDService appFirebaseInstanceIDService);
+    void inject(AppFirebaseMessagingService appFirebaseMessagingService);
 }

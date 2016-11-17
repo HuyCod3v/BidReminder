@@ -127,9 +127,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 dismissTryAgainAlert();
                 mRecyclerView.scrollToPosition(0);
                 if (query == null || query.equals("")) {
+                    mViewModel.loadPromotion(Configuration.ITEMS_PER_PAGE, 1);
+                    resetEndlessScrollRecyclerView();
                     return false;
                 }
                 mViewModel.loadProducts(query, Configuration.ITEMS_PER_PAGE, 1);
+                resetEndlessScrollRecyclerView();
                 mName = query;
                 mSearchView.clearFocus();
                 return false;
@@ -181,11 +184,21 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     }
 
+    //region Private methods
+
     private void dismissTryAgainAlert() {
         if (mSnackbar != null && mSnackbar.isShown()) {
             mSnackbar.dismiss();
             mSnackbar = null;
         }
     }
+
+    private void resetEndlessScrollRecyclerView() {
+        mEndlessScrollRecyclerViewListener.setCurrentPage(1);
+        mEndlessScrollRecyclerViewListener.setPreviousTotalItemCount(0);
+        mEndlessScrollRecyclerViewListener.setLoading(true);
+        mEndlessScrollRecyclerViewListener.setStartingPageIndex(1);
+    }
+    //endregion
 
 }

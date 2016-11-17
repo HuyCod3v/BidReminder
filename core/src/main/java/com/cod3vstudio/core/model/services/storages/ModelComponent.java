@@ -8,9 +8,11 @@ public class ModelComponent {
 
     private final ISavedModel mSavedModel;
 
-    public ModelComponent(IUserModel userModel, ISavedModel savedModel) {
-        mUserModel = userModel;
+    private final IChangeModel mChangeModel;
 
+    public ModelComponent(IUserModel userModel, ISavedModel savedModel, IChangeModel changeModel) {
+        mUserModel = userModel;
+        mChangeModel = changeModel;
         mSavedModel = savedModel;
     }
 
@@ -20,5 +22,9 @@ public class ModelComponent {
 
     public ISavedModel getSavedModel() {
         return mSavedModel;
+    }
+
+    public IChangeModel getChangeModel() {
+        return mChangeModel;
     }
 }

@@ -1,6 +1,8 @@
 package com.cod3vstudio.core.di;
 
 
+import com.cod3vstudio.core.model.services.storages.ChangeModel;
+import com.cod3vstudio.core.model.services.storages.IChangeModel;
 import com.cod3vstudio.core.model.services.storages.ISavedModel;
 import com.cod3vstudio.core.model.services.storages.IUserModel;
 import com.cod3vstudio.core.model.services.storages.ModelComponent;
@@ -33,11 +35,17 @@ public class StorageModule {
         return new SavedModel();
     }
 
+    @Provides
+    @Singleton
+    public IChangeModel providesChangeModel() {
+        return new ChangeModel();
+    }
+
 
     @Provides
     @Singleton
-    public ModelComponent providesModelComponent(IUserModel userModel, ISavedModel savedModel) {
-        return new ModelComponent(userModel, savedModel);
+    public ModelComponent providesModelComponent(IUserModel userModel, ISavedModel savedModel, IChangeModel changeModel) {
+        return new ModelComponent(userModel, savedModel, changeModel);
     }
 
     //endregion

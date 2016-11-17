@@ -96,4 +96,43 @@ public abstract class EndlessScrollRecyclerViewListener extends RecyclerView.OnS
     // Defines the process for actually loading more data based on page
     public abstract void onLoadMore(int page, int totalItemsCount);
 
+    public int getVisibleThreshold() {
+        return visibleThreshold;
+    }
+
+    public void setVisibleThreshold(int visibleThreshold) {
+        this.visibleThreshold = visibleThreshold;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPreviousTotalItemCount() {
+        return previousTotalItemCount;
+    }
+
+    public void setPreviousTotalItemCount(int previousTotalItemCount) {
+        this.previousTotalItemCount = previousTotalItemCount;
+    }
+
+    public boolean isLoading() {
+        return loading;
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+    }
+
+    public int getStartingPageIndex() {
+        return startingPageIndex;
+    }
+
+    public void setStartingPageIndex(int startingPageIndex) {
+        this.startingPageIndex = startingPageIndex;
+    }
 }

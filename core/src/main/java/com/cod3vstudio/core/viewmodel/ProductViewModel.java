@@ -89,17 +89,7 @@ public class ProductViewModel extends BaseViewModel {
     public void onCreate() {
         super.onCreate();
         register();
-        float[] prices = {120000, 130000, 170000, 140000, 100000, 70000};
-        List<Change> changes = new ArrayList<>();
-        for (int i = 0; i < prices.length; i++) {
-            Change change = new Change();
-            change.setPrice(prices[i]);
-            change.setId(i);
-            change.setChangedAt(new Date());
-            changes.add(change);
-        }
-
-        setChanges(changes);
+        loadChanges();
     }
 
     @Override
@@ -228,6 +218,11 @@ public class ProductViewModel extends BaseViewModel {
         }
     }
 
+    private void loadChanges() {
+        List<Change> changes = mModelComponent.getChangeModel().getByProduct(mProduct.getId());
+        setChanges(changes);
+    }
+
     //endregion
 
     //region Subscribe methods
@@ -237,6 +232,7 @@ public class ProductViewModel extends BaseViewModel {
         setProduct(product);
         getCurrentActivity().setTitle(mProduct.getName());
         unregister();
+        loadChanges();
     }
 
     @Subscribe(sticky = true)
@@ -251,6 +247,7 @@ public class ProductViewModel extends BaseViewModel {
         product.setName(saved.getName());
         setProduct(product);
         getCurrentActivity().setTitle(mProduct.getName());
+        loadChanges();
     }
 
     //endregion
